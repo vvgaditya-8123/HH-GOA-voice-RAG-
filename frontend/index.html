@@ -7,20 +7,22 @@
     <meta name="description" content="Voice-powered Retrieval-Augmented Generation testing dashboard with real-time latency telemetry and grounding verification.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
     <!-- ═══ Background Subtle Grid ═══ -->
     <div class="grid-bg"></div>
 
-    <!-- ═══ 1. Top Navigation Bar ═══ -->
+    <!-- ═══ 1. Top Navigation Bar with Sunset Texture ═══ -->
     <header class="top-navbar" id="header">
         <div class="navbar-container">
             <div class="navbar-brand">
                 <span class="brand-badge">LAB 02</span>
                 <div>
-                    <h1 class="brand-title">VoiceRAG</h1>
+                    <h1 class="brand-title">
+                        <span class="brand-voice">Voice</span><span class="brand-rag">RAG</span>
+                    </h1>
                     <div class="brand-sub">HH GOA 2026 // VOICE-FIRST RAG</div>
                 </div>
             </div>
@@ -34,7 +36,24 @@
             </nav>
 
             <div class="navbar-right">
-                <button class="pill-badge-gradient" id="statusPill">HH GOA 2026</button>
+                <!-- ── Goa Stamp Badge Component ── -->
+                <div class="goa-stamp-badge" title="Goa 2026 Hackathon Edition">
+                    <svg class="stamp-palm-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 4v16"/>
+                        <path d="M12 4c-3.5 0-6 2.5-6 6 3 0 5-1.5 6-3"/>
+                        <path d="M12 4c3.5 0 6 2.5 6 6-3 0-5-1.5-6-3"/>
+                        <path d="M12 9c-3 0-5 2-5 5 2.5 0 4-1 5-2.5"/>
+                        <path d="M12 9c3 0 5 2 5 5-2.5 0-4-1-5-2.5"/>
+                        <path d="M8 20c2-1 6-1 8 0"/>
+                    </svg>
+                    <div class="stamp-text-container">
+                        <span>GOA</span>
+                        <span class="stamp-dot-center">✦</span>
+                        <span>2026</span>
+                    </div>
+                </div>
+
+                <button class="pill-badge-gradient" id="statusPill">LIVE ENGINE</button>
                 <button class="user-icon-btn" title="User Profile">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </button>
@@ -69,6 +88,9 @@
                     </div>
                 </div>
 
+                <!-- Torn-Paper / Brush-Stroke Highlight Bar -->
+                <div class="highlighter-bar lime"></div>
+
                 <!-- Voice Recording Active Visualizer Box -->
                 <div class="voice-stream-state" id="voiceStateListening" style="display: none;">
                     <div class="listening-bar">
@@ -98,12 +120,12 @@
                         <div id="transcriptionText" style="font-size: 14px; font-weight: 500; color: var(--cream-text-body); margin-bottom: 0.6rem;">Transcribing...</div>
                         <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
                             <button id="btnRetryVoice" style="background: none; border: 1px solid var(--cream-border); padding: 0.35rem 0.85rem; border-radius: var(--radius-pill); font-family: var(--font-mono); font-size: 11px; font-weight: 700; cursor: pointer; color: var(--cream-text-secondary);">RETRY</button>
-                            <button id="btnRunRag" style="background: var(--accent-pink); color: #fff; border: none; padding: 0.35rem 1rem; border-radius: var(--radius-pill); font-family: var(--font-mono); font-size: 11px; font-weight: 700; cursor: pointer;">RUN RAG →</button>
+                            <button id="btnRunRag" style="background: var(--gradient-cta); color: #072e1f; border: none; padding: 0.35rem 1rem; border-radius: var(--radius-pill); font-family: var(--font-mono); font-size: 11px; font-weight: 800; cursor: pointer;">RUN RAG →</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Text Input Row with Pink Pill Primary CTA -->
+                <!-- Text Input Row with Lime-to-Amber Gradient Primary CTA -->
                 <div class="input-action-row">
                     <div class="query-input-field-wrap">
                         <svg class="input-icon-search" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -142,6 +164,9 @@
                         </div>
                     </div>
 
+                    <!-- Highlight Bar -->
+                    <div class="highlighter-bar lime"></div>
+
                     <div class="answer-content-body" id="answerBody">
                         Ask a question above or click any preset to test the live voice-enabled RAG pipeline.
                     </div>
@@ -156,9 +181,12 @@
                 <!-- Right (narrower): Latency Telemetry Dark Green Card -->
                 <div class="telemetry-dark-card">
                     <div class="telemetry-card-top">
-                        <span class="tech-label tech-label-yellow">LATENCY TELEMETRY</span>
+                        <span class="tech-label tech-label-lime">LATENCY TELEMETRY</span>
                         <span class="target-badge-gold">⚡ &lt;200ms TARGET</span>
                     </div>
+
+                    <!-- Highlight Bar -->
+                    <div class="highlighter-bar gold"></div>
 
                     <!-- Big Headline Metric: End-to-End Latency -->
                     <div class="headline-metric-box">
@@ -240,9 +268,13 @@
             <!-- ── 4. Retrieved Vector Context Chunks Section ── -->
             <div class="context-chunks-panel">
                 <div class="context-chunks-header">
-                    <span class="tech-label tech-label-yellow">RETRIEVED VECTOR CONTEXT CHUNKS</span>
+                    <span class="tech-label tech-label-lime">RETRIEVED VECTOR CONTEXT CHUNKS</span>
                     <span class="tech-label-dim" id="chunksCountLabel">0 CHUNKS LOADED</span>
                 </div>
+
+                <!-- Highlight Bar -->
+                <div class="highlighter-bar gold"></div>
+
                 <div class="chunks-grid" id="passagesGrid">
                     <div class="empty-chunks-msg">No context chunks retrieved yet. Execute a query to view vector matches.</div>
                 </div>
@@ -254,9 +286,10 @@
         <section class="tab-pane" id="panel-pipeline">
             <div class="dark-panel-card">
                 <div class="context-chunks-header">
-                    <span class="tech-label tech-label-yellow">DETAILED PIPELINE WATERFALL & TRACE</span>
+                    <span class="tech-label tech-label-lime">DETAILED PIPELINE WATERFALL & TRACE</span>
                     <span class="tech-label-dim" id="totalLatencyTrace">-- ms</span>
                 </div>
+                <div class="highlighter-bar gold"></div>
                 <div id="waterfallFull" style="display: flex; flex-direction: column; gap: 0.5rem;">
                     <div class="empty-chunks-msg">No pipeline traces recorded yet. Run a query from the Ask tab.</div>
                 </div>
@@ -267,8 +300,9 @@
         <section class="tab-pane" id="panel-retrieval">
             <div class="dark-panel-card">
                 <div class="context-chunks-header">
-                    <span class="tech-label tech-label-yellow">DENSE & HYBRID RETRIEVAL INSPECTOR</span>
+                    <span class="tech-label tech-label-lime">DENSE & HYBRID RETRIEVAL INSPECTOR</span>
                 </div>
+                <div class="highlighter-bar gold"></div>
                 <div id="retrievalInspectorGrid" class="chunks-grid">
                     <div class="empty-chunks-msg">Execute a query to inspect dense FAISS, BM25, and cross-encoder scores.</div>
                 </div>
@@ -279,8 +313,9 @@
         <section class="tab-pane" id="panel-analytics">
             <div class="dark-panel-card">
                 <div class="context-chunks-header">
-                    <span class="tech-label tech-label-yellow">LATENCY BENCHMARK HARNESS (P50 / P70 / P100)</span>
+                    <span class="tech-label tech-label-lime">LATENCY BENCHMARK HARNESS (P50 / P70 / P100)</span>
                 </div>
+                <div class="highlighter-bar gold"></div>
                 <div class="benchmark-form-row">
                     <label class="bench-field-label">
                         <span class="tech-label-dim">QUERIES</span>
@@ -296,7 +331,7 @@
                 </div>
                 <div id="benchResults" style="display: none;">
                     <div class="percentile-metrics-grid" id="percentileCards"></div>
-                    <div class="tech-label tech-label-yellow" style="margin-bottom: 0.6rem;">STAGE BREAKDOWN (AVG MS)</div>
+                    <div class="tech-label tech-label-lime" style="margin-bottom: 0.6rem;">STAGE BREAKDOWN (AVG MS)</div>
                     <div id="stageBars" style="display: flex; flex-direction: column; gap: 0.4rem;"></div>
                 </div>
             </div>
@@ -306,13 +341,14 @@
         <section class="tab-pane" id="panel-guardrails">
             <div class="dark-panel-card">
                 <div class="context-chunks-header">
-                    <span class="tech-label tech-label-yellow">GUARDRAILS & MODERATION POLICIES</span>
+                    <span class="tech-label tech-label-lime">GUARDRAILS & MODERATION POLICIES</span>
                 </div>
+                <div class="highlighter-bar gold"></div>
                 <div class="guardrails-tiles-grid">
                     <div class="guardrail-tile-card">
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <span class="status-dot-sm"></span>
-                            <span class="tech-label tech-label-yellow">SAFETY GUARDRAILS</span>
+                            <span class="tech-label tech-label-lime">SAFETY GUARDRAILS</span>
                         </div>
                         <p style="font-size: 13px; color: var(--text-on-dark-secondary);">Filters prompt injection, jailbreaks, toxicity, and malicious inputs.</p>
                         <div class="guardrail-tile-status-tag">ACTIVE (THRESHOLD: 0.85)</div>
@@ -320,7 +356,7 @@
                     <div class="guardrail-tile-card">
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <span class="status-dot-sm"></span>
-                            <span class="tech-label tech-label-yellow">RELEVANCE GATE</span>
+                            <span class="tech-label tech-label-lime">RELEVANCE GATE</span>
                         </div>
                         <p style="font-size: 13px; color: var(--text-on-dark-secondary);">Filters low-relevance queries prior to expensive index retrieval scans.</p>
                         <div class="guardrail-tile-status-tag">ACTIVE (THRESHOLD: 0.30)</div>
@@ -328,7 +364,7 @@
                     <div class="guardrail-tile-card">
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <span class="status-dot-sm"></span>
-                            <span class="tech-label tech-label-yellow">CONFIDENCE GATING</span>
+                            <span class="tech-label tech-label-lime">CONFIDENCE GATING</span>
                         </div>
                         <p style="font-size: 13px; color: var(--text-on-dark-secondary);">Rejects retrieval below minimum confidence to prevent hallucinations.</p>
                         <div class="guardrail-tile-status-tag">ACTIVE (MIN SCORE: 0.25)</div>
@@ -336,7 +372,7 @@
                     <div class="guardrail-tile-card">
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <span class="status-dot-sm"></span>
-                            <span class="tech-label tech-label-yellow">NLI GROUNDING CHECK</span>
+                            <span class="tech-label tech-label-lime">NLI GROUNDING CHECK</span>
                         </div>
                         <p style="font-size: 13px; color: var(--text-on-dark-secondary);">Cross-references generated answer claims against retrieved passages.</p>
                         <div class="guardrail-tile-status-tag">ACTIVE (NLI THRESHOLD: 0.60)</div>
@@ -347,7 +383,7 @@
 
     </main>
 
-    <!-- ═══ 5. Fixed Bottom Status Bar ═══ -->
+    <!-- ═══ 5. Fixed Bottom Status Bar + Goa Easter Egg ═══ -->
     <footer class="fixed-status-bar">
         <div class="status-bar-pills">
             <div class="status-bar-item"><span class="status-dot-gold"></span>SPEECH-TO-TEXT: ONLINE</div>
@@ -356,9 +392,10 @@
             <div class="status-bar-item"><span class="status-dot-gold"></span>LLM: ONLINE</div>
             <div class="status-bar-item"><span class="status-dot-gold"></span>GUARDRAILS: ONLINE</div>
         </div>
+        <div class="footer-easter-egg">// built in goa · sun. sand. code.</div>
         <div class="status-bar-coords">28.4707° N, 73.0278° E</div>
     </footer>
 
-    <script src="app.js?v=2"></script>
+    <script src="app.js?v=3"></script>
 </body>
 </html>
